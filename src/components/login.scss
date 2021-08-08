@@ -1,0 +1,74 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 100px;
+    // background-color: #282c34;
+    .logoContainer {
+        display: flex;
+        align-items: center;
+        .logo {
+            padding: 15px;
+            font-size: 104px;
+            color: rgb(53, 224, 195);
+        }
+        p {
+            font-family: 'Gugi', cursive;
+            color: white;
+            font-size: 30px;
+            padding: 0 25px 0 0;
+            margin: 0;
+        }
+    }
+    .loginBox {
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left: 2px solid white;
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            input {
+                padding: 8px;
+                margin: 7px;
+                border-radius: 10px;
+                width: 170px;
+                border: 1px solid rgb(53, 224, 195);
+                background-color: transparent;
+                outline: none;
+                transition: 0.1s;
+                color: white;
+                &:hover {
+                    transform: scale(1.03);
+                }
+            }
+            button {
+                background-color: rgb(53, 224, 195);
+                border: transparent;
+                border-radius: 10px;
+                padding: 7.5px;
+                margin: 7px;
+                font-size: 16px;
+                width: 170px;
+                color: white;
+                outline: none;
+                transition: 0.1s;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.03);
+                }
+            }
+        }
+    }
+}

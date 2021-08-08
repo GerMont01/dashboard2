@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+.sysContainer {
+    font-family: 'Gugi', cursive;
+    color: white;
+    padding: 5px;
+    margin-top: 25px;
+    .col {
+        .div {
+            height: 40vh;
+            width: 100%;
+            border: 1px solid white;
+            margin: 3px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+
+        } 
+    }
+    .recharts-surface{
+        position: relative;
+        left: -25px;
+        padding: 20px;
+    }
+    .recharts-default-legend{
+        position: relative;
+        left: -25px;
+    }
+    p {
+        width: 70%;
+        margin:auto;
+    }
+}
+.notAuth {
+    color: white;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+}
