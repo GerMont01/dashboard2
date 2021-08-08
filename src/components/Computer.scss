@@ -2,21 +2,22 @@
 .sysContainer {
     font-family: 'Gugi', cursive;
     color: white;
-    padding: 5px;
+    padding: 10px;
     margin-top: 25px;
     .col {
         .div {
             height: 40vh;
             width: 100%;
-            border: 1px solid white;
+            border: 2px solid white;
+            border-radius: 3px;
             margin: 3px;
+            margin-bottom: 15px;
             padding: 5px;
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-
         } 
     }
     .recharts-surface{
@@ -31,6 +32,13 @@
     p {
         width: 70%;
         margin:auto;
+        span {
+            padding: 2px;
+            border-bottom: 1px solid rgb(53, 224, 195);
+        }
+    }
+    .pTag {
+        padding-left: 10px;
     }
 }
 .notAuth {

@@ -1,3 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
 .header {
+    font-family: 'Gugi', cursive;
     position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+.logoutIcon, .register, .system{
+    color: rgb(53, 224, 195);
+    font-size: 30px;
+}
+.logoutBtn, .regBtn, .sysBtn  {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: white;
+    font-size: 20px;
+    margin: 10px;
+    padding-bottom: 5px;
+    transition: 0.2s;
+    &:hover {
+        border-bottom: 1px solid rgb(53, 224, 195);
+    }
+}
+.copyRight {
+    font-family: 'Gugi', cursive;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    color: white;
+    font-size: 13px;
 }

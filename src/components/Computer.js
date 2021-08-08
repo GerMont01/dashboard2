@@ -6,6 +6,7 @@ import './Computer.scss';
 
 function Computer() {
 const [ data, setData ] = useState()
+const [ network, setNetwork ] = useState()
 const [ chart1, setChart1 ] = useState([])
 const [ chart2, setChart2 ] = useState([])
 const [ auth, setAuth ] = useState()
@@ -36,6 +37,22 @@ const [ auth, setAuth ] = useState()
             }
             let currentValue2 = chart2.slice(Math.max(chart2.length - 60, 0))
             setChart2([...currentValue2,newValue2])
+            
+            // for (let key in data.network) {
+            //     let network = {
+            //         wifi: 
+            //     }
+            //     var net_infos=net_int[key];
+                   
+            //     net_infos.forEach(element => {      
+            //     no_of_network_interfaces++;
+            //     console.log("\tinterface:");
+                
+            //       for (var attr in element){
+            //         console.log("\t\t" + attr + 
+            //             " : " + element[attr] );
+            //       }
+            console.log(data.network['Wi-Fi'])
         }
         
     },[data])
@@ -52,29 +69,42 @@ const [ auth, setAuth ] = useState()
                 <Row>
                     <Col xs={6} md={4} className='col'>
                         <div className='div'>
-                            <p>Operating System: {data.sys}</p>
-                            <p>Architecture: {data.arch}</p>
-                            <p>Uptime: {data.uptime}s</p>
+                            <p><span>Host Name:</span> {data.host}</p>
+                            <p><span>Operating System:</span> {data.sys}</p>
+                            <p><span>Version:</span> {data.version}</p>
+                            <p><span>Architecture:</span> {data.arch}</p>
+                            <p><span>Uptime:</span> {data.uptime}s</p>
                         </div>
                     </Col>
                     <Col xs={6} md={4} className='col'>
                         <div className='div'>
-                            <p>CPU Model: {data.model}</p>
-                            <p>CPU Speed: {data.speed/1000}GHz</p>
-                            <p>CPU Usage: {(data.cpuUsage*100).toFixed(2)}%</p>
-                            <p>Logical Processors: {data.cores}</p>
+                            <p><span>CPU Model:</span> {data.model}</p>
+                            <p><span>CPU Speed:</span> {data.speed/1000}GHz</p>
+                            <p><span>CPU Usage:</span> {(data.cpuUsage*100).toFixed(2)}%</p>
+                            <p><span>Logical Processors:</span> {data.cores}</p>
                         </div>
                     </Col>
                     <Col xs={6} md={4} className='col'>
                         <div className='div'>
-                            <p>Total Memory: {(data.totalmem/1073741824).toFixed(2)}GB</p>
-                            <p>Free Memory: {(data.freemem/1073741824).toFixed(2)}GB</p>
+                            <p><span>Total Memory:</span> {(data.totalmem/1073741824).toFixed(2)}GB</p>
+                            <p><span>Free Memory:</span> {(data.freemem/1073741824).toFixed(2)}GB</p>
+                            <p><span>Total Disk Space:</span> {(data.diskspace.size/1073741824).toFixed(2)}GB</p>
+                            <p><span>Free Disk Space:</span> {(data.diskspace.free/1073741824).toFixed(2)}GB</p>
                         </div>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={6} md={4} className='col'>
-                        <div className='div'></div>
+                        <div className='div'>
+                            <p>{data.network['Wi-Fi'][0].family}</p>
+                            <p className='pTag'><span>Address:</span> {data.network['Wi-Fi'][0].address}</p>
+                            <p className='pTag'><span>Netmask:</span> {data.network['Wi-Fi'][0].netmask}</p>
+                            <p className='pTag'><span>Mac:</span> {data.network['Wi-Fi'][0].mac}</p>
+                            <p>{data.network['Wi-Fi'][1].family} </p>
+                            <p className='pTag'><span>Address:</span> {data.network['Wi-Fi'][1].address}</p>
+                            <p className='pTag'><span>Netmask:</span> {data.network['Wi-Fi'][1].netmask}</p>
+                            <p className='pTag'><span>Mac:</span> {data.network['Wi-Fi'][1].mac}</p>
+                        </div>
                     </Col>
                     <Col xs={6} md={4} className='col'>
                         <div className='div'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './login.scss';
-import { GiBigGear } from 'react-icons/gi'
+import { GiBigGear } from 'react-icons/gi';
 
 function Login() {
     const [ user, setUser ] = useState()
@@ -29,9 +29,8 @@ function Login() {
                 <form action = "/signup" method = "POST">
                     <input name = "id" type = "text" required placeholder = "User ID"/>
                     <input name = "password" type = "password" required placeholder = "Password"/>
-                    <button type = "Submit">Signup</button> 
+                    <button type = "Submit">Register</button> 
                 </form>
-                <p onClick={()=>setSignup(false)}>Return</p>
                 </>
                 ):(
                 <>
@@ -40,7 +39,6 @@ function Login() {
                     <input name = "password" type = "password" required placeholder = "Password"/>
                     <button type = "Submit">Log in</button> 
                 </form> 
-                {/* <p onClick={()=>setSignup(true)}>Don't have an account yet? Sign up</p> */}
                 </>
             )}
             </div>
