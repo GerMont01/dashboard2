@@ -20,7 +20,6 @@ export default function Header(){
 
     useEffect(()=>{
         setLogedin(data.state.logedin)
-        console.log(logedin)
     },[data])
 
     return (

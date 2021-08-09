@@ -9,6 +9,11 @@ function reducer(state, action) {
                 ...state,
                 logedin: action.payload
             };
+        case 'USER':
+            return {
+                ...state,
+                user: action.payload
+            };
         default:
             return {
                 ...state
@@ -26,6 +31,9 @@ export default function Provider(props) {
         fetch('/api/loged')
         .then(res => res.json())
         .then(data => dispatch({type:'SESSION', payload: data}))
+        fetch('/login')
+        .then(res => res.json())
+        .then(user => dispatch({type:'USER', payload: user}))
     },[])
 
     return(

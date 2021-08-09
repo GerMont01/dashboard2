@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './login.scss';
 import { GiBigGear } from 'react-icons/gi';
+import { myContext } from '../context';
 
 function Login() {
+    const data = useContext(myContext);
     const [ user, setUser ] = useState()
     const [ signup, setSignup] = useState(false)
 
     useEffect(()=>{
-        fetch('/login')
-        .then(res => res.json())
-        .then(user =>setUser(user))
-    },[])
+        setUser(data.state.user)
+    },[data])
 
     useEffect(()=>{
         if (user==='admin'){
@@ -26,7 +26,7 @@ function Login() {
             <div className='loginBox'>
             {signup ? (
                 <>
-                <form action = "/signup" method = "POST">
+                <form action = "/signup" method = "POST" autoComplete='off'>
                     <input name = "id" type = "text" required placeholder = "User ID"/>
                     <input name = "password" type = "password" required placeholder = "Password"/>
                     <button type = "Submit">Register</button> 
@@ -34,7 +34,7 @@ function Login() {
                 </>
                 ):(
                 <>
-                <form action = "/login" method = "POST">
+                <form action = "/login" method = "POST" autoComplete='off'>
                     <input name = "id" type = "text" required placeholder = "User ID"/>
                     <input name = "password" type = "password" required placeholder = "Password"/>
                     <button type = "Submit">Log in</button> 

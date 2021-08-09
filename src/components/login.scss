@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
 
 .login {
+    font-family: 'Gugi', cursive;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,6 +50,7 @@
                 outline: none;
                 transition: 0.1s;
                 color: white;
+                font-size: 15px;
                 &:hover {
                     transform: scale(1.03);
                 }

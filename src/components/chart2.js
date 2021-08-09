@@ -22,10 +22,10 @@ export default function CpuUsage(props) {
         >
         <CartesianGrid strokeDasharray="3 3" vertical={false}/>
         <XAxis dataKey="name" />
-        <YAxis/>
+        <YAxis domain={[0, 100]}/>
         <Tooltip />
         <Legend />
-        <Area type='linear' dataKey="CPU_Usage" dot={false} isAnimationActive={false} stroke="#82ca9d" fill="#82ca9d" />
+        <Area type='linear' dataKey="CPU_Usage" dot={false} isAnimationActive={false} stroke="rgb(53, 224, 195)" fill="rgb(53, 224, 195)" />
         </AreaChart>
     );
 }

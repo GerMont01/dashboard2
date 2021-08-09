@@ -1,11 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+.loading {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+    .loadingIcon {
+        font-size: 40px;
+        color: white;
+        animation: load 2s infinite
+        
+    }
+}
+@keyframes load {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
 .sysContainer {
     font-family: 'Gugi', cursive;
     color: white;
     padding: 10px;
     margin-top: 25px;
     .col {
+        position: relative;
+        input {
+            height: fit-content;
+            width: fit-content;
+            position:absolute;
+            left: 20px;
+            top: 10px;
+            z-index: 100;
+        }
         .div {
+            position: relative;
             height: 40vh;
             width: 100%;
             border: 2px solid white;
@@ -19,6 +52,20 @@
             align-items: center;
             justify-content: center;
         } 
+        .disk {
+            flex-wrap: nowrap;
+            align-items: center;
+            div:first-of-type {
+                display: flex;
+            }
+            div:nth-child(2) {
+                height: fit-content;
+                margin: auto;
+                p {
+                    width: 100%;
+                }
+            }
+        }
     }
     .recharts-surface{
         position: relative;
