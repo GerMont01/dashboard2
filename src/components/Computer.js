@@ -89,7 +89,7 @@ function Computer() {
             body: JSON.stringify(data)
         }).then(res=>res.json())
         .then(res=>{
-            console.log(res)
+            console.log('Success')
         })
     }
     return (
