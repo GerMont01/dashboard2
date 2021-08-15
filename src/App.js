@@ -4,7 +4,7 @@ import './App.css';
 import Home from './components/Home';
 import Computer from './components/Computer';
 import Login from './components/login';
-import Profile from './components/Profile';
+import Invalid from './components/Invalid'
 import Provider from './context';
 import Header from './components/Header';
 
@@ -14,6 +14,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path='/' component={Login}/>
+        <Route path='/invalid' component={Invalid}/>
         <Route path='/computer' component={Computer}/>
       </Switch>
     </Provider>

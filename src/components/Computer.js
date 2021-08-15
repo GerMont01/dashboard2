@@ -25,20 +25,21 @@ function Computer() {
     const [ chart3, setChart3 ] = useState([])
     const [ auth, setAuth ] = useState()
     const [ boxes, setBoxes ] = useState(boxesStatus)
+    const [ network, setNetwork ] = useState()
 
     useEffect(()=>{
         setUser(cxtdata.state.user)
     },[cxtdata])
-    useEffect(()=>{
-        fetch('/protected_page')
-        .then(res => res.json())
-        .then(data => setAuth(data))
-    },[])
 
     useEffect(()=> {
         setInterval(function(){ 
             getData();
         }, 1000); 
+        
+        fetch('/protected_page')
+        .then(res => res.json())
+        .then(data => setAuth(data))
+
         fetch('/admin')
         .then(res=>res.json())
         .then(res=>{
@@ -50,6 +51,7 @@ function Computer() {
             setBoxes(currentBoxes);
         }) 
     },[])
+
     useEffect(()=>{
         if (data) {
             let newValue = {
@@ -71,6 +73,13 @@ function Computer() {
                 { name: "Free Disk Space", value: Math.round(data.diskspace.free/1073741824) }
               ];
             setChart3(newValue3)  
+
+
+            if (Object.keys(data.network).some(key=>key==='Wi-Fi')){
+                setNetwork('Wi-Fi') 
+            } else {
+                setNetwork('eno1')
+            }
         }
     },[data])
 
@@ -171,14 +180,18 @@ function Computer() {
                          ):(<></>)}  
                         {(user==='admin'|| boxes.box4) ? (
                         <div className='div'>
-                            <p>{data.network['Wi-Fi'][0].family}</p>
-                            <p className='pTag'><span>Address:</span> {data.network['Wi-Fi'][0].address}</p>
-                            <p className='pTag'><span>Netmask:</span> {data.network['Wi-Fi'][0].netmask}</p>
-                            <p className='pTag'><span>Mac:</span> {data.network['Wi-Fi'][0].mac}</p>
-                            <p>{data.network['Wi-Fi'][1].family} </p>
-                            <p className='pTag'><span>Address:</span> {data.network['Wi-Fi'][1].address}</p>
-                            <p className='pTag'><span>Netmask:</span> {data.network['Wi-Fi'][1].netmask}</p>
-                            <p className='pTag'><span>Mac:</span> {data.network['Wi-Fi'][1].mac}</p>
+                            {network ? (
+                            <>
+                                <p>{data.network[network][0].family}</p>
+                                <p className='pTag'><span>Address:</span> {data.network[network][0].address}</p>
+                                <p className='pTag'><span>Netmask:</span> {data.network[network][0].netmask}</p>
+                                <p className='pTag'><span>Mac:</span> {data.network[network][0].mac}</p>
+                                <p>{data.network[network][1].family} </p>
+                                <p className='pTag'><span>Address:</span> {data.network[network][1].address}</p>
+                                <p className='pTag'><span>Netmask:</span> {data.network[network][1].netmask}</p>
+                                <p className='pTag'><span>Mac:</span> {data.network[network][1].mac}</p>
+                            </>
+                            ):(<></>)}
                         </div>
                         ):(<></>)}
                     </Col>

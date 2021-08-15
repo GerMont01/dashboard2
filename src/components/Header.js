@@ -11,15 +11,10 @@ export default function Header(){
     const [ logedin, setLogedin ] = useState();
     const [ user, setUser ] = useState()
 
-    useEffect(()=>{
-        fetch('/login')
-        .then(res => res.json())
-        .then(user =>setUser(user))
-    },[])
-
 
     useEffect(()=>{
         setLogedin(data.state.logedin)
+        setUser(data.state.user)
     },[data])
 
     return (

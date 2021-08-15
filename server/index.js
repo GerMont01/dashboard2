@@ -5,20 +5,17 @@ const express = require('express');
 const path = require('path');
 const app = express();
 app.use(express.json());
+
 const checkDiskSpace = require('check-disk-space').default;
 let diskspace = [];
-try{
+if (os.platform() === 'win32'){
    checkDiskSpace('C:/').then((diskSpace) => {
       diskspace = diskSpace
    })
-}catch{
-   try{
+} else {
       checkDiskSpace('/').then((diskSpace) => {
          diskspace = diskSpace
       })
-   } catch {
-
-   }
 }
 
 
@@ -32,7 +29,9 @@ app.get('/', (req,res) =>{
 app.get('/computer', (req,res) =>{
    res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 });
-
+app.get('/invalid', (req,res) =>{
+   res.sendFile(path.join(__dirname, "..", "build", "index.html"));
+});
 
 let cpuUsage = [];
 setInterval(() =>{
@@ -43,7 +42,12 @@ app.get('/api/system', (req, res) => {
    let host = os.hostname();
    let arch = os.arch();
    let sys = os.platform();
-   let version = os.version();
+   let version = '' 
+   if (sys = 'win32'){
+      version = os.version();
+   } else{
+      version = sys;
+   }
    let cpu = os.cpus();
    let uptime = os.uptime();
    let totalmem = os.totalmem();
@@ -119,31 +123,30 @@ app.set('client','./client');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+require('dotenv').config();
 app.use(upload.array());
 app.use(cookieParser());
-app.use(session({secret: "Your secret key"}));
+app.use(session({secret: process.env.SESSION_SECRET}));
 
 var Users = [];
 
 
 app.post('/signup', function(req, res){
    if(!req.body.id || !req.body.password){
-      res.status("400");
-      res.send("Invalid details!");
+      res.redirect("/");
    } else {
-      Users.filter(function(user){
-         if(user.id === req.body.id){
-            res.send("UserID already in use");
-         }
-      });
-      var newUser = {id: req.body.id, password: req.body.password};
-      Users.push(newUser);
-      res.redirect('/');
+      if (Users.some(user=>user.id === req.body.id)){
+         res.redirect("/invalid");
+      } else {
+         var newUser = {id: req.body.id, password: req.body.password};
+         Users.push(newUser);
+         res.redirect('/');
+      }
+      
    }
 });
 
 app.get('/protected_page', function(req, res){
-//    res.render('protected_page', {id: req.session.user.id})
     if(req.session.user){
         res.json(req.session.user.id)
     }else {
@@ -160,8 +163,7 @@ app.get('/login', function(req, res){
    }
 });
 app.post('/login', function(req, res){
-
-   if(Users.length===0&&req.body.id){
+   if(Users.length===0&&req.body.id==='admin'){
       var newUser = {id: req.body.id, password: req.body.password};
       Users.push(newUser);
       req.session.user = newUser;
@@ -170,7 +172,8 @@ app.post('/login', function(req, res){
    }else{
       if(!req.body.id || !req.body.password){
          res.redirect('/');
-      //   res.render('login', {message: "Please enter both id and password"});
+      } else if (!Users.some(user=>user.id === req.body.id)){
+         res.redirect('/invalid');
       } else {
          Users.filter(user => {
             if(user.id === req.body.id && user.password === req.body.password){
@@ -181,10 +184,7 @@ app.post('/login', function(req, res){
          });
          Users.filter(user => {
             if(user.id === req.body.id && user.password !== req.body.password){
-               res.send(`
-                  <p>Invalid credentials!</p>
-                  <a href='/'>Return</a>
-               `);
+               res.redirect('/invalid');
             }
          });
       }
@@ -200,27 +200,8 @@ app.post('/logout', function(req, res){
    res.redirect('/');
 });
 
-app.use('/protected_page', function(err, req, res, next){
-    console.log(err);
-   //User should be authenticated! Redirect him to log in.
-   res.redirect('/');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+   res.redirect('/')
 });
 
 const port = process.env.PORT || 5000;
