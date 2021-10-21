@@ -43,7 +43,7 @@ app.get('/api/system', (req, res) => {
    let arch = os.arch();
    let sys = os.platform();
    let version = '' 
-   if (sys = 'win32'){
+   if (sys === 'win32'){
       version = os.version();
    } else{
       version = sys;
