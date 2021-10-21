@@ -1,6 +1,6 @@
 # System Analyzer
 
-Analyzes the machine on which the app is running and displays some useful information like achitecture, cpu model, cpu usage, RAM, diskspace, etc.
+Analyzes the server on which the app is running and displays some useful information like achitecture, cpu model, cpu usage, RAM, diskspace, etc.
 This app handles 2 user levels: admin and users. Admin can register new users and define which data can be seen.
 
 ### Clone app and install all dependencies
