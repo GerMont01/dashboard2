@@ -9,6 +9,10 @@ git clone https://github.com/GerMont01/dashboard2.git
 
 git install
 
+add an .env file and add a secret, it can be any string.
+
+SESSION_SECRET= { your_secret }
+
 ### `npm start`
 
 Builds and Runs the app.
